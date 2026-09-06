@@ -1,3 +1,8 @@
-# Fishbowl Inventory Connector - UI_COMPONENT_PLAN.md
+# Fishbowl Inventory Connector — UI Component Plan
 
-Standard documentation for Fishbowl Inventory Connector in Imperal Cloud.
+**Compliance:** UI_INTERFACE_STANDARD.md
+
+## Интерфейс
+- **Левый сайдбар:** Форма подключения на всю ширину контейнера, все инпуты с лейблами и контекстными плейсхолдерами.
+- **Центральная зона:** Карточки статуса подключения, таблица сущностей (товары/детали (/parts)), журнал операций.
+- **Модальные окна:** Предупреждения и подтверждения для любых деструктивных или модифицирующих действий.
