@@ -53,7 +53,7 @@ async def connect_fishbowl_inventory_connector(params: ConnectParams, ctx) -> Ac
     for c in conns: c["is_active"] = False
     conns.append(rec)
     await _save_conns(ctx, conns)
-    return ActionResult.ok(rec, summary=f"Connected Fishbowl Inventory ({rec['label']}).")
+    return ActionResult.success(rec, summary=f"Connected Fishbowl Inventory ({rec['label']}).")
 
 @chat.function("list_connections", "List configured Fishbowl Inventory connections.", action_type="read", chain_callable=True, event="fishbowl-inventory-connector.list_connections", effects=["read:connections"], data_model=ConnectionList)
 async def list_connections(params: NoParams, ctx) -> ActionResult:
@@ -65,7 +65,7 @@ async def list_connections(params: NoParams, ctx) -> ActionResult:
         "base_url": c.get("base_url", "https://api.fishbowlonline.com/api/v1"),
         "is_active": c.get("is_active", False)
     } for c in conns]
-    return ActionResult.ok({"connections": items, "total": len(items)}, summary=f"Found {len(items)} connection(s).")
+    return ActionResult.success({"connections": items, "total": len(items)}, summary=f"Found {len(items)} connection(s).")
 
 @chat.function("disconnect_fishbowl_inventory_connector", "Disconnect Fishbowl Inventory account and delete stored credentials.", action_type="destructive", chain_callable=True, event="fishbowl-inventory-connector.disconnect_fishbowl_inventory_connector", effects=["delete:connection"], data_model=DeleteResult)
 async def disconnect_fishbowl_inventory_connector(params: ConnectionIdParams, ctx) -> ActionResult:
@@ -77,4 +77,4 @@ async def disconnect_fishbowl_inventory_connector(params: ConnectionIdParams, ct
     else:
         conns.clear()
     await _save_conns(ctx, conns)
-    return ActionResult.ok({"success": True, "message": "Disconnected successfully."}, summary="Disconnected Fishbowl Inventory connection.")
+    return ActionResult.success({"success": True, "message": "Disconnected successfully."}, summary="Disconnected Fishbowl Inventory connection.")
